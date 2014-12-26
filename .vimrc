@@ -18,11 +18,11 @@ function! s:LoadBundles()
 endfunction
 
 function! s:SetCustomColorScheme()
-  " iTerm2のpresetsにJaponesqueをセットした時のカスタマイズ
+  " iTerm2のpresetsにJellybeansをセットした時のカスタマイズ
   highlight LineNr ctermfg=red guifg=red
-  highlight Statement ctermfg=magenta guifg=magenta
-  highlight Comment ctermfg=blue guifg=blue
-  highlight vimComment ctermfg=blue guifg=blue
+  highlight Statement ctermfg=yellow guifg=yellow
+  " highlight Comment ctermfg=blue guifg=blue
+  " highlight vimComment ctermfg=blue guifg=blue
 endfunction
 
 " 常時使いたい設定
