@@ -27,7 +27,6 @@ endfunction
 
 " 常時使いたい設定
 function! s:SetCommonSettings()
-  filetype indent plugin on
   syntax on
   call s:SetCustomColorScheme()
 
@@ -56,8 +55,8 @@ endfunction
 " ================================
 " メイン処理
 function! s:InitNeoBundle()
+  filetype plugin indent on
   if isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
-    filetype plugin indent off
     if has('vim_starting')
       set runtimepath+=~/.vim/bundle/neobundle.vim/
     endif
