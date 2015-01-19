@@ -64,7 +64,7 @@ setopt transient_rprompt
 
 ## rbenv
 # export PATH=$HOME/.rbenv/bin:$PATH
-# eval "$(rbenv init -)"
+# eval "$(rbenv init - zsh)"
 
 ## virtualenvs
 # WORKON_HOME="~/.virtualenvs"
