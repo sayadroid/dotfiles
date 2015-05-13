@@ -33,7 +33,6 @@ function! s:SetCommonSettings()
   set ruler
   set number
   set nf=alpha
-  set cursorline
   set autoindent
   set expandtab
   set nobackup
@@ -43,6 +42,13 @@ function! s:SetCommonSettings()
   set history=50
   " ステータスバーの設定
   set laststatus=2
+
+  " 行列のハイライト設定
+  set cursorline
+  highlight CursorLine cterm=None ctermbg=Black
+  set cursorcolumn
+  highlight CursorColumn ctermbg=Black
+
   " ファイル保存時に行末スペースを削除
   autocmd BufWritePre * :%s/\s\+$//e
 
