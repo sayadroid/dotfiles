@@ -10,6 +10,8 @@ function! s:LoadBundles()
   NeoBundle 'alpaca-tc/alpaca_powertabline'
   NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
   NeoBundle 'scrooloose/nerdtree'
+  " endを自動挿入 for Ruby
+  NeoBundle 'tpope/vim-endwise'
 
   " bundle系のキーマップ
   nnoremap <silent><C-e> :NERDTreeToggle<CR>
