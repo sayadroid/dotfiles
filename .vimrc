@@ -45,7 +45,7 @@ function! s:SetCommonSettings()
 
   " 行列のハイライト設定
   set cursorline
-  highlight CursorLine cterm=None ctermbg=Black
+  highlight CursorLine ctermbg=Black
   set cursorcolumn
   highlight CursorColumn ctermbg=Black
 
