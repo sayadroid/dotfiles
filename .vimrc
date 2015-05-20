@@ -37,8 +37,11 @@ endfunction
 
 " 常時使いたい設定
 function! s:SetCommonSettings()
-  syntax on
   call s:SetCustomColorScheme()
+  set nocompatible
+  syntax on
+  filetype on
+  filetype plugin indent on
 
   set ruler
   set number
@@ -71,7 +74,6 @@ endfunction
 " ================================
 " メイン処理
 function! s:InitNeoBundle()
-  filetype plugin indent on
   if isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
     if has('vim_starting')
       set runtimepath+=~/.vim/bundle/neobundle.vim/
@@ -86,8 +88,7 @@ function! s:InitNeoBundle()
   else
     call s:WithoutBundles()
   endif
-
-  call s:SetCommonSettings()
 endfunction
 
 call s:InitNeoBundle()
+call s:SetCommonSettings()
