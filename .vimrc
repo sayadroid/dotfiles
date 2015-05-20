@@ -6,12 +6,20 @@ endfunction
 " NeoBundle よるプラグインのロードと各プラグインの初期化
 function! s:LoadBundles()
   NeoBundle 'Shougo/neobundle.vim'
-  NeoBundle 'tpope/vim-surround'
   NeoBundle 'alpaca-tc/alpaca_powertabline'
   NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
+  NeoBundle 'tpope/vim-surround'
   NeoBundle 'scrooloose/nerdtree'
+
+  " syntax check
+  NeoBundle 'scrooloose/syntastic'
+  let g:syntastic_ruby_checkers = ['rubocop']
   " endを自動挿入 for Ruby
   NeoBundle 'tpope/vim-endwise'
+  " indent for ruby
+  NeoBundle 'vim-ruby/vim-ruby'
+  " 括弧などの補完
+  NeoBundle 'Townk/vim-autoclose'
 
   " bundle系のキーマップ
   nnoremap <silent><C-e> :NERDTreeToggle<CR>
