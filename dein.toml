@@ -1,0 +1,59 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+hook_post_update = '''
+  if dein#util#_is_windows()
+    let cmd = 'tools\\update-dll-mingw'
+  elseif dein#util#_is_cygwin()
+    let cmd = 'make -f make_cygwin.mak'
+  elseif executable('gmake')
+    let cmd = 'gmake'
+  else
+    let cmd = 'make'
+  endif
+  let g:dein#plugin.build = cmd
+'''
+
+# 依存関係を指定
+[[plugins]]
+repo    = 'vim-airline/vim-airline'
+depends = ['vim-airline-themes']
+hook_post_update = '''
+  let g:airline_powerline_fonts = 1
+  set laststatus=2
+  let g:airline_theme = 'bubblegum'
+'''
+
+# 依存関係を指定したからと言って、自動でインストールはされない
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo = 'alpaca-tc/alpaca_powertabline'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+# syntax check
+[[plugins]]
+repo = 'scrooloose/syntastic'
+hook_post_update = '''
+  let g:syntastic_ruby_checkers = ['rubocop']
+'''
+
+# endを自動挿入 for Ruby
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+# indent for ruby
+[[plugins]]
+repo = 'vim-ruby/vim-ruby'
+
+# 括弧などの補完
+[[plugins]]
+repo = 'Townk/vim-autoclose'

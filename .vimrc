@@ -1,31 +1,38 @@
-" NeoBundle が未インストールの時、プラグイン初期化に失敗した時の処理
-function! s:WithoutBundles()
-  " 今のところ特に無し
-endfunction
+scriptencoding utf-8
+set encoding=utf-8
 
-" NeoBundle よるプラグインのロードと各プラグインの初期化
-function! s:LoadBundles()
-  NeoBundle 'Shougo/neobundle.vim'
-  NeoBundle 'alpaca-tc/alpaca_powertabline'
-  NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-  NeoBundle 'tpope/vim-surround'
-  NeoBundle 'scrooloose/nerdtree'
+"dein.vim の設定
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-  " syntax check
-  NeoBundle 'scrooloose/syntastic'
-  let g:syntastic_ruby_checkers = ['rubocop']
-  " endを自動挿入 for Ruby
-  NeoBundle 'tpope/vim-endwise'
-  " indent for ruby
-  NeoBundle 'vim-ruby/vim-ruby'
-  " 括弧などの補完
-  NeoBundle 'Townk/vim-autoclose'
+" dein.vim がなければ github から落とす
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+endif
 
-  " bundle系のキーマップ
-  nnoremap <silent><C-e> :NERDTreeToggle<CR>
-  " 未インストールのbundleがあればインストールする
-  NeoBundleCheck
-endfunction
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  " プラグインリストを収めた TOML ファイルを用意
+  let g:rc_dir    = expand('~/.vim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+
+  " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+" 未インストールものものがあったらインストール
+if dein#check_install()
+  call dein#install()
+endif
+
+" =================
 
 function! s:SetCustomColorScheme()
   " iTerm2のpresetsにJellybeansをセットした時のカスタマイズ
@@ -71,24 +78,4 @@ function! s:SetCommonSettings()
   endif
 endfunction
 
-" ================================
-" メイン処理
-function! s:InitNeoBundle()
-  if isdirectory(expand("~/.vim/bundle/neobundle.vim/"))
-    if has('vim_starting')
-      set runtimepath+=~/.vim/bundle/neobundle.vim/
-    endif
-    try
-      call neobundle#begin(expand('~/.vim/bundle/'))
-      call s:LoadBundles()
-      call neobundle#end()
-    catch
-      call s:WithoutBundles()
-    endtry
-  else
-    call s:WithoutBundles()
-  endif
-endfunction
-
-call s:InitNeoBundle()
 call s:SetCommonSettings()
